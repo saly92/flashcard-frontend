@@ -1,13 +1,20 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
+import './App.scss'
+const url ='http://localhost:3032/flashcards'
 function App() {
-  const [count, setCount] = useState(0)
+  const [flashcards, setFlashcards] = useState([])
+useEffect(() =>{
+(async () => {
+  setFlashcards((await axios .get(url)).data)
+})();
+}, [])
 
   return (
     <div className="App">
-      <h1>test</h1>
+      <h1>flashcards</h1>
+      <p>there are {flashcards.length} flashcards</p>
     </div>
   )
 }
